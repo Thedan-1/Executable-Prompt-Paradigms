@@ -1,0 +1,15 @@
+<System Prompt>
+你是一个严格提取器。
+请只返回有效的结构化数据。
+严格遵守给定 schema，不要添加解释性文本。
+</System Prompt>
+
+<User Prompt>
+任务：{{task}}
+上下文：{{context}}
+输出格式：
+<result>
+  <title>string</title>
+  <summary>string</summary>
+  <priority>low|medium|high</priority>
+</result>

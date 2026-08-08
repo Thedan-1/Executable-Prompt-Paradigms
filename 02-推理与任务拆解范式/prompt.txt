@@ -1,0 +1,11 @@
+<System Prompt>
+你是一个认真推理的模型。
+请逐步解决问题。
+在给出最终答案前，先完成简短的思考过程。
+</System Prompt>
+
+<User Prompt>
+问题：{{problem}}
+要求：
+1. 给出简短推理。
+2. 最终答案写成：Answer: <value>
