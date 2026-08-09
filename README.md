@@ -1,33 +1,52 @@
-# Executable Prompt Engineering Paradigms
+# 面向研发的可执行提示词范式工程库
 
-这个仓库收集了五个常见的提示词范式，并以可运行的方式展示它们如何落到工程实践中。重点不是“写得更像 prompt”，而是把模型调用过程整理成可验证、可调试、可控的一组示例。
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE) [![Python: 3.9+](https://img.shields.io/badge/Python-3.9%2B-blue.svg)](#)
 
-## 目录结构
+本仓库以工程化视角收集并实现若干可执行的提示词（prompt）范式，目标是把模型调用流程做成可验证、可调试、可复用的工程模块，便于在研发流程中复现与迭代。
 
-```text
-Executable-Prompt-Paradigms/
-├── 01-结构化输出范式/
-├── 02-推理与任务拆解范式/
-├── 03-工具与动作协同范式/
-├── 04-反思与自愈范式/
-└── 05-防御与安全范式/
+**功能总览**
+
+| 模块 | 现在可用能力 |
+|---|---|
+| Crawler | 多站点抓取、候选公告页发现、URL 去重 |
+| Extractor | trafilatura + readability + 纯文本回退 |
+| Structuring | LLM 优先抽取，规则引擎回退 |
+| Database | 来源表、公告表、来源健康评分表 |
+| API | /health /sources /announcements /sources/health |
+| MCP | 提供工具接口骨架（Python 3.10+） |
+
+**系统流程图**
+
+```mermaid
+flowchart LR
+	A[来源配置 sources.yaml] --> B[多站点爬取/候选页发现]
+	B --> C[抽取正文/清洗]
+	C --> D[结构化抽取 (LLM/规则)]
+	D --> E[入库: 来源/公告/元信息]
+	E --> F[API 提供: /sources /announcements /health]
+	style A fill:#f9f,stroke:#333,stroke-width:1px
 ```
 
-## 运行方式
+**快速开始**
+
+在项目根目录执行：
 
 ```bash
 pip install -r requirements.txt
-python 01-结构化输出范式/demo.py
-python 02-推理与任务拆解范式/demo.py
-python 03-工具与动作协同范式/demo.py
-python 04-反思与自愈范式/demo.py
-python 05-防御与安全范式/demo.py
+# 复制环境变量示例（Unix / macOS）
+cp .env.example .env
+# Windows PowerShell:
+Copy-Item .env.example .env
+
+# 初始化数据库（示例脚本，视项目实际路径调整）
+python scripts/init_db.py
+
+# 本地运行示例服务或定时任务
+python scripts/run_daily.py
 ```
 
-## 说明
+更多使用示例、配置项和设计思路请参见各子目录下的 `README.md`。
 
-- 01-结构化输出范式：展示如何把输出约束到 schema 中。
-- 02-推理与任务拆解范式：展示多样本推理与多数投票。
-- 03-工具与动作协同范式：展示工具调用与 ReAct 风格循环。
-- 04-反思与自愈范式：展示基于错误反馈的修复流程。
-- 05-防御与安全范式：展示注入防御与基本安全边界。
+---
+
+感谢使用与反馈，欢迎提交 issue 或 PR。 
