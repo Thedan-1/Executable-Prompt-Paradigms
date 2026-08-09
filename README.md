@@ -19,11 +19,11 @@
 
 ```mermaid
 flowchart LR
-	A[来源配置 sources.yaml] --> B[多站点爬取/候选页发现]
-	B --> C[抽取正文/清洗]
-	C --> D[结构化抽取 (LLM/规则)]
-	D --> E[入库: 来源/公告/元信息]
-	E --> F[API 提供: /sources /announcements /health]
+	A["来源配置 sources.yaml"] --> B["多站点爬取 / 候选页发现"]
+	B --> C["抽取正文 / 清洗"]
+	C --> D["结构化抽取: LLM 或 规则引擎"]
+	D --> E["入库: 来源 / 公告 / 元信息"]
+	E --> F["API 提供: /sources /announcements /health"]
 	style A fill:#f9f,stroke:#333,stroke-width:1px
 ```
 
