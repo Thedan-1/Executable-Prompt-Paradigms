@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify-demos:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Syntax check all demos
+        run: python -c "import glob, py_compile; files = sorted(glob.glob('0*/demo.py')); [py_compile.compile(f, doraise=True) for f in files]; print('OK:', ', '.join(files))"
+
+      - name: Smoke test local-only demo (no API key needed)
+        run: python "05-防御与安全范式/demo.py"
