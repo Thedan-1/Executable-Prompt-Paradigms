@@ -33,16 +33,15 @@ flowchart LR
 
 ```bash
 pip install -r requirements.txt
-# 复制环境变量示例（Unix / macOS）
-cp .env.example .env
+
+# 设置 OpenAI API Key（demo 需要）
+# Unix / macOS:
+export OPENAI_API_KEY="sk-..."
 # Windows PowerShell:
-Copy-Item .env.example .env
+$env:OPENAI_API_KEY = "sk-..."
 
-# 初始化数据库（示例脚本，视项目实际路径调整）
-python scripts/init_db.py
-
-# 本地运行示例服务或定时任务
-python scripts/run_daily.py
+# 运行某个范式的 demo
+python 01-结构化输出范式/demo.py
 ```
 
 更多使用示例、配置项和设计思路请参见各子目录下的 `README.md`。
